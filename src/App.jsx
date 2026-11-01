@@ -1,33 +1,25 @@
-import React, { useState } from 'react';
-import Header from './components/header/Header.jsx';
-import About from './components/about/About.jsx';
-import Lectors from './components/lectors/Lectors.jsx';
-import Partner from './components/partner/Partner.jsx';
-
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/layout/Layout.jsx';
+import HomePage from './pages/HomePage.jsx';
+import LecturersPage from './pages/LecturersPage.jsx';
+import LecturerDetailPage from './pages/LecturerDetailPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import PartnersPage from './pages/PartnersPage.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('Главная');
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'Главная':
-        return <About />;
-      case 'Партнеры':
-        return <Partner />;
-      case 'Лекторы':
-        return <Lectors />;
-      default:
-        return <About />;
-    }
-  };
-
   return (
-    <div className="App">
-      <Header currentPage={currentPage} onPageChange={setCurrentPage} />
-      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-        {renderPage()}
-      </main>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="lecturers" element={<LecturersPage />} />
+        <Route path="lecturers/:id" element={<LecturerDetailPage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="partners" element={<PartnersPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

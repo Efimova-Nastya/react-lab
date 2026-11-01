@@ -48,8 +48,8 @@ react-lab/
             lecturers.js        # Массив из 10 лекторов
         App.jsx                 # Корневой компонент + навигация через useState
         App.css
-    index.css                   # Глобальные стили + градиентный фон
-    main.jsx                    # Точка входа React
+        index.css                   # Глобальные стили + градиентный фон
+        main.jsx                    # Точка входа React
     index.html
     package.json
     vite.config.js

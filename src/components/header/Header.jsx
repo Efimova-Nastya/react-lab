@@ -1,55 +1,69 @@
 import React from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
-const Header = ({ currentPage, onPageChange }) => {
-  const navLinks = [
-    { label: 'Главная', target: 'home' },
-    { label: 'О нас', target: 'reviews' },
-    { label: 'Партнеры', target: 'partners' },
-    { label: 'Лекторы', target: 'lectors' },
-    
-  ];
+const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleNavClick = (target) => {
-    if (currentPage !== 'Главная') {
-      onPageChange('Главная');
-      setTimeout(() => scrollToSection(target), 100);
-    } else {
-      scrollToSection(target);
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
     }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleReviewsClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const reviewsSection = document.getElementById('reviews');
+        if (reviewsSection) {
+          reviewsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const reviewsSection = document.getElementById('reviews');
+      if (reviewsSection) {
+        reviewsSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   return (
     <header className="site-header">
       <div className="header-inner">
-        <div className="logo" onClick={() => onPageChange('Главная')}>
+        <a href="/" onClick={handleHomeClick} className="logo" style={{ textDecoration: 'none', cursor: 'pointer' }}>
           LectorPro
-        </div>
+        </a>
 
         <nav className="nav-container">
-          {navLinks.map((link) => (
-            <button
-              key={link.label}
-              onClick={() => {
-                if (link.target === 'partners' || link.target === 'lectors') {
-                   onPageChange(link.label);
-                } else {
-                   handleNavClick(link.target);
-                }
-              }}
-              className={`nav-btn ${currentPage === link.label ? 'active' : ''}`}
-              type="button"
-            >
-              {link.label}
-            </button>
-          ))}
+          <button onClick={handleHomeClick} className={`nav-btn ${location.pathname === '/' ? 'active' : ''}`} type="button">
+            Главная
+          </button>
+
+          <button onClick={handleReviewsClick} className="nav-btn" type="button">
+            Отзывы
+          </button>
+
+          <NavLink 
+            to="/partners" 
+            className={({ isActive }) => `nav-btn ${isActive ? 'active' : ''}`}
+          >
+            Партнеры
+          </NavLink>
+
+          <NavLink 
+            to="/lecturers" 
+            className={({ isActive }) => `nav-btn ${isActive ? 'active' : ''}`}
+          >
+            Лекторы
+          </NavLink>
         </nav>
         
         <a href="tel:+79277777777" className="phone">

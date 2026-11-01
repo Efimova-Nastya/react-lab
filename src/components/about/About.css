@@ -5,7 +5,6 @@
   font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
 }
 
-/* Hero */
 .lectors-hero {
   display: flex;
   align-items: center;
@@ -82,7 +81,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Button */
 .cta-btn {
   background-color: #3d6cd1;
   color: #fff;
@@ -106,7 +104,6 @@
   transform: translateY(0);
 }
 
-/* Info */
 .platform-info {
   padding-top: 40px;
   border-top: 1px solid #e5e5e5;
@@ -171,7 +168,6 @@
   }
 }
 
-/* ==== Блок отзывов ==== */
 .reviews-section {
   padding: 60px 20px;
   text-align: center;
